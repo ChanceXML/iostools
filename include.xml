@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <source path="IOSTools" />
+
+    <target id="ios">
+        <file name="IOSTools/IOSToolsBridge.mm" />
+        
+        <dependency path="IOSTools/IOSTools.swift" />
+        
+        <dependency path="IOSTools/Permissions/PermissionManager.swift" />
+        <dependency path="IOSTools/Permissions/PermissionType.swift" />
+        
+        <dependency path="IOSTools/UI/AlertManager.swift" />
+        <dependency path="IOSTools/UI/FeedbackManager.swift" />
+        
+        <dependency path="IOSTools/Storage/StorageManager.swift" />
+        
+        <dependency path="IOSTools/Device/DeviceManager.swift" />
+      
+        <dependency path="IOSTools/Files/FilePermissionManager.swift" />
+        <dependency path="IOSTools/Files/FilePickerManager.swift" />
+        
+        <dependency name="AVFoundation.framework" />
+        <dependency name="Photos.framework" />
+        <dependency name="CoreLocation.framework" />
+        <dependency name="Contacts.framework" />
+    </target>
+</project>
