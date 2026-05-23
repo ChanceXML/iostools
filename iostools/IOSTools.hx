@@ -94,11 +94,8 @@ class IOSTools {
         return "Mac/PC";
     }
 
-    public static function pickFiles(callback:String->Void, allowMultiple:Bool = false):Void {
-        fileCallback = callback;
-        #if 
-        ios iostools_pick_folder(); 
-        #end
+    public static function pickFolder():Void {
+        #if ios iostools_pick_folder(); #end
     }
 
     public static function onFilePicked(path:String):Void {
@@ -106,7 +103,10 @@ class IOSTools {
             fileCallback(path);
     } 
 
-    public static function pickFiles(allowMultiple:Bool = false):Void {
-        #if ios iostools_pick_files(allowMultiple); #end
+    public static function pickFiles(callback:String->Void, allowMultiple:Bool = false):Void {
+        fileCallback = callback;
+        #if 
+        ios iostools_pick_folder(); 
+        #end
     }
 }
