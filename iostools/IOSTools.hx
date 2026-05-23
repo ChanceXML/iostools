@@ -7,6 +7,7 @@ import lime.system.CFFI;
 class IOSTools {
 
     #if ios
+    private static var fileCallback:String->Void;
     private static var iostools_request_permission = CFFI.load("IOSTools", "iostools_request_permission", 1);
     
     private static var iostools_show_alert = CFFI.load("IOSTools", "iostools_show_alert", 3);
@@ -93,9 +94,17 @@ class IOSTools {
         return "Mac/PC";
     }
 
-    public static function pickFolder():Void {
-        #if ios iostools_pick_folder(); #end
+    public static function pickFiles(callback:String->Void, allowMultiple:Bool = false):Void {
+        fileCallback = callback;
+        #if 
+        ios iostools_pick_folder(); 
+        #end
     }
+
+    public static function onFilePicked(path:String):Void {
+        if (fileCallback != null)
+            fileCallback(path);
+    } 
 
     public static function pickFiles(allowMultiple:Bool = false):Void {
         #if ios iostools_pick_files(allowMultiple); #end
