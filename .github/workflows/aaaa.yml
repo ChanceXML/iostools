@@ -1,0 +1,44 @@
+name: Rename Folder
+
+on:
+  workflow_dispatch:
+    inputs:
+      old_name:
+        description: "Current folder name"
+        required: true
+        default: "IOS"
+
+      new_name:
+        description: "New folder name"
+        required: true
+        default: "ios"
+
+jobs:
+  rename-folder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Rename folder
+        run: |
+          if [ -d "${{ github.event.inputs.old_name }}" ]; then
+            mv "${{ github.event.inputs.old_name }}" temp_folder
+            mv temp_folder "${{ github.event.inputs.new_name }}"
+          else
+            echo "Folder does not exist"
+            exit 1
+          fi
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .
+          git commit -m "Rename folder ${{ github.event.inputs.old_name }} to ${{ github.event.inputs.new_name }}" || echo "No changes to commit"
+
+      - name: Push changes
+        run: |
+          git push
