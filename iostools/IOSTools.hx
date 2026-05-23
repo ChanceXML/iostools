@@ -1,4 +1,4 @@
-package IOSTools;
+package iostools;
 
 #if ios
 import lime.system.CFFI;
